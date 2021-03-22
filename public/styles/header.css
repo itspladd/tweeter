@@ -1,0 +1,10 @@
+header {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #799ea3;
+  background-image: url('../images/subtle-white-feathers.png');
+}
