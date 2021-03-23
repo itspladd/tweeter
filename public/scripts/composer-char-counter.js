@@ -1,5 +1,7 @@
 $(document).ready( () => {
+  $counter = $('#tweetCharCounter');
   $('textarea#tweet-text').on('input', function() {
-    console.log(this.value);
+    length = this.value.length;
+    console.log(length);
   });
 });
