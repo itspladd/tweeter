@@ -1,0 +1,14 @@
+.tweet {
+  display: flex;
+  flex-direction: column;
+}
+
+.tweet header {
+  display: flex;
+  flex-direction: row;
+}
+
+.tweet header img {
+  width: 75px;
+  height: 75px;
+}
