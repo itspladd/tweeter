@@ -6,7 +6,8 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    
     <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
 
@@ -42,6 +43,7 @@
     </header>
     <!-- Page-specific (main) content here -->
     <main class="container">
+      <!-- Contains the "make a new tweet" HTML. -->
       <section class="new-tweet">
         <form method="POST" action="/tweets/">
           <label for="tweet-text">What are you humming about?</label>
@@ -54,22 +56,26 @@
           </div>
         </form>
       </section>
+
+      <!-- Contains all other tweets on the page. -->
       <section id="all-tweets">
         <article class="tweet">
           <header>
             <img src="https://i.imgur.com/nlhLi3I.png">
-            <p class="name">Newton</p>
-            <p class="handle">@SirIsaac</p>
+            <span class="name">Newton</span>
+            <span class="handle">@SirIsaac</span>
           </header>
           <section>
-            <p>If I have good vision, blame my giant shoulders.</p>
+            If I have good vision, blame my giant shoulders.
           </section>
           <footer>
             <time class="postDate">10 days ago</time>
-            <div class="interactions">
-              <p>1</p>
-              <p>2</p>
-              <p>3</p>
+            <!-- Contains the buttons with actions you can take. -->
+            <div class="actions">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              
             </div>
           </footer>
         </article>
