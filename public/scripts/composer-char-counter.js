@@ -1,3 +1,5 @@
 $(document).ready( () => {
-  console.log('howdy');
+  $('textarea#tweet-text').on('input', function() {
+    console.log(this.value);
+  });
 });
