@@ -49,3 +49,10 @@
   color: white;
   padding: .2em .6em .2em .6em;
 }
+
+.red-text {
+  color: red;
+}
+.yellow-text {
+  color: rgb(131, 197, 0);
+}
