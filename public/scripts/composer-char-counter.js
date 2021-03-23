@@ -1,6 +1,10 @@
 $(document).ready( () => {
+  // Cache the elements so we're not re-doing the search every time.
   const $counter = $('#tweetCharCounter');
-  $('textarea#tweet-text').on('input', function() {
+  const $newTweetText = $('textarea#tweet-text');
+
+  // Event listener to update counter when we add text to the new tweet field.
+  $newTweetText.on('input', function() {
     updateCounter($counter, this);
   });
 });
