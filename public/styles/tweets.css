@@ -8,6 +8,11 @@
   flex-direction: column;
   border: 2px black solid;
   padding: 0.5em;
+  background-color: #b1faff;
+}
+
+.tweet:hover {
+  filter: drop-shadow(5px 5px 0 #7aafb3);
 }
 
 /* Contains user avatar, name, @handle. */
@@ -42,9 +47,14 @@
   margin-right: 10px;
 }
 
-/* @handle within */
+/* @handle within tweet, does not display by default */
 .tweet .handle {
   margin-left: auto;
   font-weight: 600;
   color: #7aafb3;
+  display: none;
+}
+
+.tweet:hover .handle {
+  display: block;
 }
