@@ -21,7 +21,7 @@
 }
 
 #tweet-text-outer:focus-within {
-  background: #69f5ffb7;
+  background: var(--shadow-color);
 }
 
 
@@ -45,7 +45,7 @@
 
 #under-new-tweet button {
   border: 0;
-  background-color: #4056A1;
+  background-color: var(--tweeter-blue);
   color: white;
   padding: .2em .6em .2em .6em;
 }

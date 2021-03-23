@@ -2,7 +2,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #4056A1;
+  background-color: var(--tweeter-blue);
   color: white;
   height: 120px;
   width: 100%;

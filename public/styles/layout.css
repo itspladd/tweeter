@@ -17,7 +17,8 @@ html {
  /* Global background color variable */
  :root {
    --body-color: #b1faff;
-   --shadow-color: #7aafb3;
+   --shadow-color: #84bec2;
+   --tweeter-blue: #4056A1;
  }
 
 body {
