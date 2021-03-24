@@ -9,6 +9,7 @@
   border: 2px black solid;
   padding: 0.5em;
   background-color: var(--body-color);
+  margin-top: 1em;
 }
 
 .tweet:hover {
