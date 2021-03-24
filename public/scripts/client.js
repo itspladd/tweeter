@@ -30,6 +30,15 @@ const data = [
   }
 ]
 
+const loadTweets = () => {
+  $.ajax({
+    url: '/tweets',
+    method: 'GET'
+  })
+  .then(res => renderTweets(res))
+  .catch(err => console.log(err));
+}
+
 // Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
   const $container = $('#all-tweets');
@@ -79,9 +88,39 @@ const createTweetElement = tweetData => {
   return $tweet;
 };
 
+const handleNewTweetSubmit = function(event) {
+  event.preventDefault();
+  const data = $(this).serialize();
+  sendTweetToServer(data, console.log)
+};
 
+const sendTweetToServer = (data, callback) => {
+  $.ajax({
+    url: `/tweets/`,
+    method: 'POST',
+    data
+  })
+  .then(res => {
+    clearNewTweetText();
+    callback(res);
+  })
+  .catch(err => console.log(err));
+}
+
+const clearNewTweetText = () => {
+  $newTweetTextArea.val('');
+}
 
 // When document is ready, render the tweets
 $( () => {
-  renderTweets(data);
+  // Cache important elements
+  $newTweetTextArea = $('#tweet-text');
+  $allTweets = $('#all-tweets');
+
+
+
+  // Add handler to new tweet form
+  $('#new-tweet').on('submit', handleNewTweetSubmit);
+
+  loadTweets();
 });
