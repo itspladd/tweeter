@@ -72,26 +72,6 @@ const createTweetElement = tweetData => {
 
   $tweet.append($header, $content, $footer);
 
-//Alternate implementation with HTML structure in the JS.
-/*   $tweet = $(`
-    <article class="tweet">
-      <header>
-        <img src="${tweetData.user.avatars}">
-        <span class="name">${tweetData.user.name}</span>
-        <span class="handle">${tweetData.user.handle}</span>
-      </header>
-    
-      <section>${tweetData.content.text}</section>
-      <footer>
-        <time class="postDate">${tweetData.created_at}</time>
-        <div class="actions">
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-      </footer>
-    </article>
-  `); */
-
   return $tweet;
 };
 
