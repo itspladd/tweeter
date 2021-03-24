@@ -10,23 +10,26 @@ $( () => {
   // Add handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
-  loadTweets();
+  loadTweets(renderTweets);
 });
 
-const loadTweets = () => {
+const loadTweets = (callback) => {
   $.ajax({
     url: '/tweets',
     method: 'GET'
   })
-  .then(res => renderTweets(res))
+  .then(res => callback(res))
   .catch(err => console.log(err));
 }
 
 // Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
+  // Make the array show the most recent tweets at the front.
+  reversed = tweetDataArray.reverse();
+
   const $container = $('#all-tweets');
   $container.empty();
-  for (let $tweet of tweetDataArray) {
+  for (let $tweet of reversed) {
     $tweet = createTweetElement($tweet);
     $container.append($tweet);
   }
@@ -120,7 +123,7 @@ const sendTweetToServer = (data, $textBox) => {
   })
   .then(res => {
     clearText($textBox);
-    loadTweets();
+    loadTweets(renderTweets);
   })
   .catch(err => console.log(err));
 }
