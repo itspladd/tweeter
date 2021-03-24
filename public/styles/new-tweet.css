@@ -5,6 +5,16 @@
   margin-top: 1em;
 }
 
+.new-tweet .error {
+  display: none;
+  position: relative;
+  top: -.5em;
+  padding: .2em;
+  border: 2px solid red;
+  background-color: rgb(235, 84, 84);
+  align-items: center;
+}
+
 .new-tweet label {
   margin: 0 0 0.5em 0 ;
 }

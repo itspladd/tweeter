@@ -1,12 +1,5 @@
 // When document is ready, render the tweets
 $( () => {
-  // Cache important elements
-  const $counter = $('#tweetCharCounter');
-  const $newTweetTextArea = $('#tweet-text');
-  const $allTweets = $('#all-tweets');
-
-
-
   // Add handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
@@ -77,14 +70,22 @@ const createTweetElement = tweetData => {
 
 const handleNewTweetSubmit = function(event) {
   event.preventDefault();
-  const data = $(this).serialize();
-  const $textBox = $(this).find('textarea');
-  try {
-    validateTweet(data);
-    sendTweetToServer(data, $textBox);
-  } catch (err) {
-    alert(err)
-  }
+  const $form = $(this)
+  const $textBox = $form.find('textarea');
+  const $errBox = $form.prev();
+  const data = $form.serialize();
+
+  // Slide the error box up before validating the tweet or submitting AJAX requests.
+  // Otherwise, if there's a second error, the text updates while the box is still sliding closed.
+  $errBox.slideUp('fast', () => {
+    try {
+      validateTweet(data);
+      sendTweetToServer(data, $textBox);
+    } catch (err) {
+      // Set and show error box 
+      $errBox.text(err.message).slideDown();
+    }
+  });
 };
 
 // Validate the content in the tweet to make sure it's OK.
@@ -97,15 +98,14 @@ const validateTweet = serializedTweet => {
   // Error is blank; if it doesn't stay blank, we throw an error.
   let err = '';
 
-  // This will prob
   if (type !== 'text') {
-    err = `Serialized URI does not start with "text=", it instead begins with "${type}="`; 
+    err = `❕Serialized URI does not start with "text=", it instead begins with "${type}="`; 
   }
   if (!content) {
-    err = `Tweet is empty, can't submit!`;
+    err = `❕Tweet is empty, can't submit!`;
   }
   if (content.length > 140) {
-    err = `Tweet is over 140 characters, can't submit!`;
+    err = `❕Tweet is over 140 characters, can't submit!`;
   }
 
   // If we've created an error message, throw the error.
