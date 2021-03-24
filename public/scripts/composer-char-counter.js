@@ -5,13 +5,14 @@ $(document).ready( () => {
 
   // Event listener to update counter when we add text to the new tweet field.
   $newTweetText.on('input', function() {
-    updateCounter($counter, this);
+    updateCounter($(this));
   });
 });
 
-const updateCounter = function($counter, textArea) {
+const updateCounter = ($textArea) => {
   const maxTweetChars = 140;
-  length = textArea.value.length;
+  const $counter = $textArea.parent().parent().find('output');
+  length = $textArea.val().length;
   remaining = maxTweetChars - length;
   $counter.text(remaining);
   toggleCounterColor($counter, remaining);

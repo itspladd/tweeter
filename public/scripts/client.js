@@ -1,8 +1,17 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+// When document is ready, render the tweets
+$( () => {
+  // Cache important elements
+  const $counter = $('#tweetCharCounter');
+  const $newTweetTextArea = $('#tweet-text');
+  const $allTweets = $('#all-tweets');
+
+
+
+  // Add handler to new tweet form
+  $('#new-tweet').on('submit', handleNewTweetSubmit);
+
+  loadTweets();
+});
 
 const loadTweets = () => {
   $.ajax({
@@ -12,7 +21,6 @@ const loadTweets = () => {
   .then(res => renderTweets(res))
   .catch(err => console.log(err));
 }
-
 // Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
   const $container = $('#all-tweets');
@@ -65,36 +73,55 @@ const createTweetElement = tweetData => {
 const handleNewTweetSubmit = function(event) {
   event.preventDefault();
   const data = $(this).serialize();
-  sendTweetToServer(data, console.log)
+  const $textBox = $(this).find('textarea');
+  try {
+    validateTweet(data);
+    sendTweetToServer(data, $textBox);
+  } catch (err) {
+    alert(err)
+  }
 };
 
-const sendTweetToServer = (data, callback) => {
+// Validate the content in the tweet to make sure it's OK.
+// TODO: May have to tweak this if we change the new tweet functionality.
+const validateTweet = serializedTweet => {
+  // Separate the serialized tweet into its component parts
+  splitText = serializedTweet.split('=');
+  type = splitText[0];
+  content = splitText[1];
+  // Error is blank; if it doesn't stay blank, we throw an error.
+  let err = '';
+
+  // This will prob
+  if (type !== 'text') {
+    err = `Serialized URI does not start with "text=", it instead begins with "${type}="`; 
+  }
+  if (!content) {
+    err = `Tweet is empty, can't submit!`;
+  }
+  if (content.length > 140) {
+    err = `Tweet is over 140 characters, can't submit!`;
+  }
+
+  // If we've created an error message, throw the error.
+  // Otherwise, nothing happens!
+  if (err) {
+    throw new Error(err);
+  }
+};
+
+const sendTweetToServer = (data, $textBox) => {
   $.ajax({
     url: `/tweets/`,
     method: 'POST',
     data
   })
   .then(res => {
-    clearNewTweetText();
-    callback(res);
+    clearText($textBox);
   })
   .catch(err => console.log(err));
 }
 
-const clearNewTweetText = () => {
-  $newTweetTextArea.val('');
+const clearText = $area => {
+  $area.val('').trigger('input');
 }
-
-// When document is ready, render the tweets
-$( () => {
-  // Cache important elements
-  $newTweetTextArea = $('#tweet-text');
-  $allTweets = $('#all-tweets');
-
-
-
-  // Add handler to new tweet form
-  $('#new-tweet').on('submit', handleNewTweetSubmit);
-
-  loadTweets();
-});
