@@ -3,6 +3,10 @@ $( () => {
   // Add handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
+  $('nav div').click( () => {
+    $('.new-tweet').slideDown(400);
+  })
+
   loadTweets(renderTweets);
 });
 
