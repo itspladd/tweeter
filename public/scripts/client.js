@@ -45,27 +45,29 @@ const createTweetElement = tweetData => {
   // Header elements
   const $header = $('<header>');
   const $avatar = $('<img>', { src: tweetData.user.avatars });
-  const $username = $('<span>', { class: 'name' }).text(tweetData.user.name);
-  const $handle = $('<span>', { class: 'handle' }).text(tweetData.user.handle);
-  
+  const $username = $('<span>', { class: 'name' })
+    .text(tweetData.user.name);
+  const $handle = $('<span>', { class: 'handle' })
+    .text(tweetData.user.handle);
+
+  // Build header
+  $header.append($avatar, $username, $handle);
+
   // Actual tweet content
-  const $content = $('<section>').text(tweetData.content.text);
+  const $content = $('<section>')
+    .text(tweetData.content.text);
 
   // Footer elements
   const $footer = $('<footer>');
-  const $postDate = $('<time>', { class: 'postDate' }).text(tweetData.created_at);
-  
+  const $postDate = $('<time>', { class: 'postDate' })
+    .text(tweetData.created_at);
   // Action buttons (inside footer)
   // TODO: Change these to images, add interactivity via classes(?)
   const $actions = $('<div>', { class: 'actions' });
   const $flag = $('<span>').text('1');
   const $retweet = $('<span>').text('2');
   const $like = $('<span>').text('3');
-
-  // TWEET, ASSEMBLE!
   $actions.append($flag, $retweet, $like);
-
-  $header.append($avatar, $username, $handle);
   $footer.append($postDate, $actions);
 
   $tweet.append($header, $content, $footer);
