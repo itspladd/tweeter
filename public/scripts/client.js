@@ -5,6 +5,7 @@ $( () => {
 
   $('nav div').click( () => {
     $('.new-tweet').slideDown(400);
+    $('#tweet-text').focus();
   })
 
   loadTweets(renderTweets);
