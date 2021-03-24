@@ -21,9 +21,11 @@ const loadTweets = () => {
   .then(res => renderTweets(res))
   .catch(err => console.log(err));
 }
+
 // Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
   const $container = $('#all-tweets');
+  $container.empty();
   for (let $tweet of tweetDataArray) {
     $tweet = createTweetElement($tweet);
     $container.append($tweet);
@@ -118,10 +120,12 @@ const sendTweetToServer = (data, $textBox) => {
   })
   .then(res => {
     clearText($textBox);
+    loadTweets();
   })
   .catch(err => console.log(err));
 }
 
 const clearText = $area => {
+  // If there's an 'input' handler on this element (for instance, to update a counter), trigger it manually when we clear the value.
   $area.val('').trigger('input');
 }
