@@ -30,14 +30,16 @@ const data = [
   }
 ]
 
+// Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
   const $container = $('#all-tweets');
   for (let $tweet of tweetDataArray) {
-    const $tweet = createTweetElement($tweet);
+    $tweet = createTweetElement($tweet);
     $container.append($tweet);
   }
 };
 
+//Build the tweet <article> element
 const createTweetElement = tweetData => {
   // Container element
   const $tweet = $('<article>', { class: 'tweet' });
@@ -61,20 +63,25 @@ const createTweetElement = tweetData => {
   const $footer = $('<footer>');
   const $postDate = $('<time>', { class: 'postDate' })
     .text(tweetData.created_at);
-  // Action buttons (inside footer)
-  // TODO: Change these to images, add interactivity via classes(?)
+  // Action buttons (inside footer) (TODO: Change these to images, add interactivity via classes(?)
   const $actions = $('<div>', { class: 'actions' });
   const $flag = $('<span>').text('1');
   const $retweet = $('<span>').text('2');
   const $like = $('<span>').text('3');
+
+  // Build action buttons and footer
   $actions.append($flag, $retweet, $like);
   $footer.append($postDate, $actions);
 
+  // Build tweet and return
   $tweet.append($header, $content, $footer);
 
   return $tweet;
 };
 
 
+
 // When document is ready, render the tweets
-$( () => renderTweets(data));
+$( () => {
+  renderTweets(data);
+});
