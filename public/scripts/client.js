@@ -1,23 +1,38 @@
 // When document is ready, render the tweets
 $( () => {
   $window = $(window);
-  $navButton = $('nav div');
   $header = $('header');
-  // Add handler to new tweet form
+  $navButton = $('nav div');
+  $jumpButton = $('#jump-button');
+
+  // Prevents button from "flickering" on page load.
+  // See layout.css for more info.
+  $jumpButton.hide();
+  $jumpButton.css('opacity', 100);
+
+  // Add submission handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
   // Add handler for nav button to expand new tweet form
   $navButton.click( () => {
-    $('.new-tweet').slideDown(400);
+    $('.new-tweet').slideDown(300);
     $('#tweet-text').focus();
   });
 
-  // Add scroll functionality
+  // Jump to the top of the page when we click this button.
+  // Seems to automatically fire a scroll() event, so no need to trigger it manually to swap the button visibility.
+  $jumpButton.click( () => {
+    $window.scrollTop(0);
+  })
+
+  // Add scroll functionality. If we scroll past the header, swap the buttons.
   $window.scroll( () => {
     if ($window.scrollTop() <= $header.height()) {
-      $navButton.show()
+      $navButton.fadeIn(100);
+      $jumpButton.fadeOut(100);
     } else {
-      $navButton.hide();
+      $navButton.fadeOut(100);
+      $jumpButton.fadeIn(100);
     } 
   });
 
