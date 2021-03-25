@@ -14,7 +14,11 @@ $( () => {
 
   // Add scroll functionality
   $window.scroll( () => {
-    $window.scrollTop() <= $header.height() ? $navButton.show() : $navButton.hide();
+    if ($window.scrollTop() <= $header.height()) {
+      $navButton.show()
+    } else {
+      $navButton.hide();
+    } 
   });
 
   loadTweets(renderTweets);
