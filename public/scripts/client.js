@@ -84,7 +84,7 @@ const createTweetElement = tweetData => {
   // Footer elements
   const $footer = $('<footer>');
   const $postDate = $('<time>', { class: 'postDate' })
-    .text(tweetData.created_at);
+    .text(millisecondsToString(tweetData.created_at));
   // Action buttons (inside footer) (TODO: Change these to images, add interactivity via classes(?)
   const $actions = $('<div>', { class: 'actions' });
   const $flag = $('<span>').text('1');
@@ -164,4 +164,12 @@ const sendTweetToServer = (data, $textBox) => {
 const clearText = $area => {
   // If there's an 'input' handler on this element (for instance, to update a counter), trigger it manually when we clear the value.
   $area.val('').trigger('input');
+}
+
+// Helper function to generate the proper date and/or "submitted X minutes/hours/days ago" text
+const millisecondsToString = ms => {
+  let timeString = '';
+  const dateCreated = new Date(ms); 
+  timeString = dateCreated.toString();
+  return timeString;
 }
