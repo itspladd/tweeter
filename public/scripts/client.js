@@ -1,12 +1,21 @@
 // When document is ready, render the tweets
 $( () => {
+  $window = $(window);
+  $navButton = $('nav div');
+  $header = $('header');
   // Add handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
-  $('nav div').click( () => {
+  // Add handler for nav button to expand new tweet form
+  $navButton.click( () => {
     $('.new-tweet').slideDown(400);
     $('#tweet-text').focus();
-  })
+  });
+
+  // Add scroll functionality
+  $window.scroll( () => {
+    $window.scrollTop() <= $header.height() ? $navButton.show() : $navButton.hide();
+  });
 
   loadTweets(renderTweets);
 });
