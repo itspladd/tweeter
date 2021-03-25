@@ -77,7 +77,7 @@ body {
  #jump-button * {
    width: 3em;
    height: 3em;
-   fill: var(--tweeter-blue-shadow);
+   fill: white;
  }
 
 /*******************************************************

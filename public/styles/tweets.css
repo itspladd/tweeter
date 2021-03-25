@@ -51,18 +51,25 @@
   color: var(--shadow-color);
 }
 
+/* Action buttons */
+.tweet .actions * {
+  width: 1.5em;
+  height: 1em;
+  margin-left: .2em;
+}
+
 @media(hover: hover) and (pointer: fine) {
   .tweet:hover {
     filter: drop-shadow(5px 5px 0 var(--shadow-color));
   }
 
-  /* Hide the handle initially */
-  .tweet .handle {
+  /* Hide the handle and action icons initially */
+  .tweet .handle, .tweet .actions * {
     display: none;
   }
-  
+
   /* Display @handle when hovering over tweet */
-  .tweet:hover .handle {
-    display: block;
+  .tweet:hover .handle, .tweet:hover .actions * {
+    display: inline;
   }
 }
