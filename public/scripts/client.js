@@ -1,11 +1,24 @@
 // When document is ready, render the tweets
 $( () => {
+  // Grab all the elements we need and save them in an object.
+  // This makes it a lot easier to modularize functions.
   $window = $(window);
   $header = $('header');
   $navBar = $('nav');
   $navButton = $('nav div');
   $navButtonSymbol = $('nav div svg');
   $jumpButton = $('#jump-button');
+  $newTweetBox = $('.new-tweet');
+  $newTweetTextField = $('#tweet-text');
+  $cachedElements = {
+    $window,
+    $header,
+    $navBar,
+    $navButton,
+    $jumpButton,
+    $navButtonSymbol,
+    $newTweetBox,
+  };
 
   // Prevents button from "flickering" on page load.
   // See layout.css for more info.
@@ -15,32 +28,17 @@ $( () => {
   // Add submission handler to new tweet form
   $('#new-tweet').on('submit', handleNewTweetSubmit);
 
-  // Add handler for nav button to expand new tweet form
-  $navButton.click( () => {
-    $('.new-tweet').slideToggle(300);
-    $navButtonSymbol.animate({transform: 'rotate(180deg)'})
-    $('#tweet-text').focus();
-  });
+  // Expand the "new tweet" box when clicked
+  $navButton.click( () => toggleNewTweetBox($cachedElements));
 
   // Jump to the top of the page when we click this button.
   // Seems to automatically fire a scroll() event, so no need to trigger it manually to swap the button visibility.
-  $jumpButton.click( () => {
-    $window.scrollTop(0);
-  })
+  $jumpButton.click( () => $window.scrollTop(0));
 
   // Add scroll functionality. If we scroll past the header, swap the buttons.
-  $window.scroll( () => {
-    if ($window.scrollTop() <= $header.height()) {
-      $navBar.removeClass('small');
-      $navButton.fadeIn(100);
-      $jumpButton.fadeOut(100);
-    } else {
-      // Making the navbar small is a callback so the button fully fades before we shrink the bar.
-      $navButton.fadeOut(100, () => $navBar.addClass('small'));
-      $jumpButton.fadeIn(100);
-    } 
-  });
+  $window.scroll( () => toggleNavInterface($cachedElements));
 
+  // Load tweets, then render them once data is retrieved
   loadTweets(renderTweets);
 });
 
