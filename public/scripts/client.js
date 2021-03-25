@@ -115,7 +115,7 @@ const handleNewTweetSubmit = function(event) {
   // Otherwise, if there's a second error, the text updates while the box is still sliding closed.
   $errBox.slideUp('fast', () => {
     try {
-      validateTweet(data);
+      validateTweet($textBox.val());
       sendTweetToServer(data, $textBox);
     } catch (err) {
       // Set and show error box 
@@ -126,22 +126,15 @@ const handleNewTweetSubmit = function(event) {
 
 // Validate the content in the tweet to make sure it's OK.
 // TODO: May have to tweak this if we change the new tweet functionality.
-const validateTweet = serializedTweet => {
-  // Separate the serialized tweet into its component parts
-  splitText = serializedTweet.split('=');
-  type = splitText[0];
-  content = splitText[1];
+const validateTweet = content => {
   // Error is blank; if it doesn't stay blank, we throw an error.
   let err = '';
 
-  if (type !== 'text') {
-    err = `❕Serialized URI does not start with "text=", it instead begins with "${type}="`; 
-  }
-  if (!content) {
-    err = `❕Tweet is empty, can't submit!`;
+  if (!content.trim()) {
+    err = `❕You can't make a blank tweet!`
   }
   if (content.length > 140) {
-    err = `❕Tweet is over 140 characters, can't submit!`;
+    err = `❕Tweets must be under 140 characters!`;
   }
 
   // If we've created an error message, throw the error.

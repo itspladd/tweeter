@@ -57,7 +57,7 @@ DESKTOP STYLE
   }
  }
 
- @media(hover: hover) and (pointer: fine) {
+@media(hover: hover) and (pointer: fine) {
   nav div:hover {
     filter: drop-shadow(5px 5px 0 var(--tweeter-blue-shadow));
     border: 3px solid var(--tweeter-blue-shadow);
