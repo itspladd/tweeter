@@ -12,15 +12,6 @@
   margin-top: 1em;
 }
 
-.tweet:hover {
-  filter: drop-shadow(5px 5px 0 var(--shadow-color));
-}
-
-/* Display @handle when hovering over tweet */
-.tweet:hover .handle {
-  display: block;
-}
-
 /* Contains user avatar, name, and handle elements. */
 .tweet header {
   display: flex;
@@ -58,6 +49,20 @@
   margin-left: auto;
   font-weight: 600;
   color: var(--shadow-color);
-  display: none;
 }
 
+@media(hover: hover) and (pointer: fine) {
+  .tweet:hover {
+    filter: drop-shadow(5px 5px 0 var(--shadow-color));
+  }
+
+  /* Hide the handle initially */
+  .tweet .handle {
+    display: none;
+  }
+  
+  /* Display @handle when hovering over tweet */
+  .tweet:hover .handle {
+    display: block;
+  }
+}
