@@ -19,8 +19,15 @@ const toggleNewTweetBox = ($cachedElements) => {
   $newTweetTextField.focus();
 }
 
+// Animate any element closed, if it's visible.
 const closeBox = $box => {
   if($box.css('display') !== 'none') {
     $box.slideUp(300);
   }
+}
+
+// Generic function to put text in an element and display it.
+// Used primarily to display errors.
+const displayMessage = ($box, msg) => {
+  $box.text(msg).slideDown();
 }

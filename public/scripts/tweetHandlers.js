@@ -52,28 +52,31 @@ const createTweetElement = tweetData => {
 const handleNewTweetSubmit = function(event) {
   event.preventDefault();
 
-  // Doesn't used the cached elements.
-  // We want to make sure it's ONLY working with the data in the form that fired the 'submit' event. 
+  // This function doesn't used the cached elements like the animations.
+  // We want to make sure this function ONLY uses the data in the form that fired the 'submit' event. 
+  // Ideally, this would make it easier in the future if we have multiple forms on the page that someone could submit a tweet from.
   const $form = $(this);
   const $textBox = $form.find('textarea');
   const $errBox = $form.prev();
   const data = $form.serialize();
-
+  const tweetContent = $textBox.val();
+  
   // Slide the error box up before validating the tweet or submitting AJAX requests.
   // Otherwise, if there's a second error, the text updates while the box is still sliding closed.
   $errBox.slideUp('fast', () => {
     try {
-      validateTweet($textBox.val());
-      sendTweetToServer(data, $textBox);
+      // validateTweet will throw a custom error if the validation fails, preventing the tweet from being submitted.
+      validateTweet(tweetContent);
+      // We don't clear the textbox quite yet, since we want to wait for successful submission to server.
+      sendTweetToServer(data, $textBox, $errBox);
     } catch (err) {
       // Set and show error box 
-      $errBox.text(err.message).slideDown();
+      displayMessage($errBox, err.message);
     }
   });
 };
 
 // Validate the content in the tweet to make sure it's OK.
-// TODO: May have to tweak this if we change the new tweet functionality.
 const validateTweet = content => {
   // Error is blank; if it doesn't stay blank, we throw an error.
   let err = '';
@@ -92,7 +95,8 @@ const validateTweet = content => {
   }
 };
 
-const sendTweetToServer = (data, $textBox) => {
+// Send the tweet, then clear the input form and load tweets if successful
+const sendTweetToServer = (data, $textBox, $errBox) => {
   $.ajax({
     url: `/tweets/`,
     method: 'POST',
@@ -102,7 +106,12 @@ const sendTweetToServer = (data, $textBox) => {
     clearText($textBox);
     loadTweets(renderTweets);
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    // TODO: Log the error in a better way.
+    console.log(err);
+    const msg = 'There was a problem submitting your tweet to the server. Try again later!';
+    displayMessage($errBox, msg);
+  });
 }
 
 const loadTweets = (callback) => {
@@ -114,7 +123,7 @@ const loadTweets = (callback) => {
   .catch(err => console.log(err));
 }
 
-// Add all tweets from input array to the #all-tweets element
+// Clear the #all-tweets element, then add all tweets from input array to it (in 'reverse' order via prepend) 
 const renderTweets = tweetDataArray => {
 
   const $container = $('#all-tweets');
