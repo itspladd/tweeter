@@ -10,6 +10,7 @@ $( () => {
   $jumpButton = $('#jump-button');
   $newTweetBox = $('.new-tweet');
   $newTweetTextField = $('#tweet-text');
+  $newTweetErrorBox = $('.new-tweet .error');
   $cachedElements = {
     $window,
     $header,
@@ -18,6 +19,8 @@ $( () => {
     $jumpButton,
     $navButtonSymbol,
     $newTweetBox,
+    $newTweetTextField,
+    $newTweetErrorBox,
   };
 
   // Load tweets, then render them once data is retrieved.

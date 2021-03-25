@@ -13,7 +13,14 @@ const toggleNavInterface = ($cachedElements) => {
 
 // Expand/collapse the "new tweet" box
 const toggleNewTweetBox = ($cachedElements) => {
+  closeBox($newTweetErrorBox);
   $newTweetBox.slideToggle(300);
   $navButtonSymbol.animate({transform: 'rotate(180deg)'})
   $newTweetTextField.focus();
+}
+
+const closeBox = $box => {
+  if($box.css('display') !== 'none') {
+    $box.slideUp(300);
+  }
 }
