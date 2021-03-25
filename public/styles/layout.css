@@ -63,7 +63,7 @@ body {
    transform: rotate(180deg);
 
    /* This part is a hack. The opacity starts a 0 so that the button won't show on load.
-   *  Once we load the page, we $.hide() the div, then set its opacity back to 100.
+   *  On page load, we hide() the div, then set its opacity back to 100.
    *  This is to keep the button from "flickering" when the page loads, while allowing
    *  us to use hide() and show() while preserving the flex CSS.
    */
