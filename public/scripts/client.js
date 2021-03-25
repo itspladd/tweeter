@@ -4,6 +4,7 @@ $( () => {
   $header = $('header');
   $navBar = $('nav');
   $navButton = $('nav div');
+  $navButtonSymbol = $('nav div svg');
   $jumpButton = $('#jump-button');
 
   // Prevents button from "flickering" on page load.
@@ -16,7 +17,8 @@ $( () => {
 
   // Add handler for nav button to expand new tweet form
   $navButton.click( () => {
-    $('.new-tweet').slideDown(300);
+    $('.new-tweet').slideToggle(300);
+    $navButtonSymbol.animate({transform: 'rotate(180deg)'})
     $('#tweet-text').focus();
   });
 
@@ -53,14 +55,12 @@ const loadTweets = (callback) => {
 
 // Add all tweets from input array to the #all-tweets element
 const renderTweets = tweetDataArray => {
-  // Make the array show the most recent tweets at the front.
-  reversed = tweetDataArray.reverse();
 
   const $container = $('#all-tweets');
   $container.empty();
-  for (let $tweet of reversed) {
+  for (let $tweet of tweetDataArray) {
     $tweet = createTweetElement($tweet);
-    $container.append($tweet);
+    $container.prepend($tweet);
   }
 };
 

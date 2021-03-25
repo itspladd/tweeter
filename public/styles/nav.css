@@ -25,10 +25,7 @@ nav div {
   background-color: var(--tweeter-blue);
 }
 
-nav div:hover {
-  filter: drop-shadow(5px 5px 0 var(--tweeter-blue-shadow));
-  border: 3px solid var(--tweeter-blue-shadow);
-}
+
 
 nav svg {
   width: 1.5em;
@@ -59,3 +56,10 @@ DESKTOP STYLE
     padding-right: 10%;
   }
  }
+
+ @media(hover: hover) and (pointer: fine) {
+  nav div:hover {
+    filter: drop-shadow(5px 5px 0 var(--tweeter-blue-shadow));
+    border: 3px solid var(--tweeter-blue-shadow);
+  }
+}
