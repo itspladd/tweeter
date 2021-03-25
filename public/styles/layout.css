@@ -14,6 +14,10 @@ html {
  * Global layout stuff. Mobile styling first!
  */
 
+/*******************************************************
+MOBILE STYLE
+********************************************************/
+
  /* Global background color variable */
  :root {
    --body-color: #b1faff;
@@ -25,7 +29,7 @@ html {
 body {
   color: #545149;
   background-color: var(--body-color);
-  font-size: 24px;
+  font-size: medium;
   font-family: 'Source Sans Pro', sans-serif;
   display: flex;
   flex-direction: column;
@@ -74,4 +78,24 @@ body {
    width: 3em;
    height: 3em;
    fill: var(--tweeter-blue-shadow);
+ }
+
+/*******************************************************
+DESKTOP STYLE
+********************************************************/
+
+ @media only screen and (min-width: 1024px) {
+  body {
+    font-size: 24px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  main.container {
+    flex-basis: 60%;
+    padding-top: 5em;
+  }
+  
  }

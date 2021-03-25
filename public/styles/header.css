@@ -1,11 +1,28 @@
 body > header {
-  height: 520px;
+  height: 25em;
   width: 100%;
-  padding-top: 120px;
+  padding-top: 5em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #799ea3a6;
   background-image: url('../images/subtle-white-feathers.png');
+}
+
+header div h2 {
+  margin: .2em;
+}
+
+/*******************************************************
+DESKTOP STYLE
+********************************************************/
+
+@media only screen and (min-width: 1024px) {
+  body > header {
+    height: 20em;
+    position: sticky;
+    top: 1em;
+    flex-basis: 30%;
+  }
 }

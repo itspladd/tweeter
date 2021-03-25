@@ -2,6 +2,7 @@
 $( () => {
   $window = $(window);
   $header = $('header');
+  $navBar = $('nav');
   $navButton = $('nav div');
   $jumpButton = $('#jump-button');
 
@@ -28,10 +29,12 @@ $( () => {
   // Add scroll functionality. If we scroll past the header, swap the buttons.
   $window.scroll( () => {
     if ($window.scrollTop() <= $header.height()) {
+      $navBar.removeClass('small');
       $navButton.fadeIn(100);
       $jumpButton.fadeOut(100);
     } else {
-      $navButton.fadeOut(100);
+      // Making the navbar small is a callback so the button fully fades before we shrink the bar.
+      $navButton.fadeOut(100, () => $navBar.addClass('small'));
       $jumpButton.fadeIn(100);
     } 
   });
@@ -173,7 +176,6 @@ const millisecondsToString = ms => {
   
   // How long ago was this tweet posted in ms/s/min/hours/days?
   const deltaMs = Date.now() - ms;
-  console.log(deltaMs);
   const deltaS = Math.round(deltaMs / 1000);
   const deltaM = Math.round(deltaS / 60);
   const deltaH = Math.round(deltaM / 60);

@@ -1,7 +1,7 @@
 nav {
   position: fixed;
   top: 0;
-  height: 120px;
+  height: 5em;
   width: 100%;
   padding: 1em;
   color: white;
@@ -14,14 +14,14 @@ nav {
 
 .logo {
   font-family: 'Bungee', sans-serif;
-  font-size: xx-large;
+  font-size: 1.5em;
 }
 
 nav div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: .2em;
   background-color: var(--tweeter-blue);
 }
 
@@ -39,3 +39,23 @@ nav svg image {
   width: 1.5em;
   height: 1.5em;
 }
+
+/* This class ONLY exists for small screens. */
+@media only screen and (max-width: 425px) {  
+  nav.small {
+    height: 3em;
+    padding: .5em;
+  }
+}
+
+/*******************************************************
+DESKTOP STYLE
+********************************************************/
+
+@media only screen and (min-width: 1024px) {
+  nav {
+    /* This matches the 80% width of the body div. */
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+ }
