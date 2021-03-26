@@ -46,3 +46,6 @@ Tweeter adapts to both mobile-sized and desktop-size views, with custom function
 <!-- responsive.gif goes here -->
 ![](https://github.com/itspladd/tweeter/blob/master/docs/responsive.gif)
 *In this simulation of a touch-only device with no hover functionality, the show-on-hover elements, such as the @handles and icons, display by default!*
+
+### That's it.
+Thanks for checking out my project!
